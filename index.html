@@ -9,17 +9,15 @@
 <body>
 
 <div class="main-card" id="appBody">
-   
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">FA</button>
 
     <div class="content-container">
- 
         <div class="slide">
             <div class="time-display" id="timerLabel">00:00:00</div>
             <div class="controls-row">
+                <!-- ترتیب دکمه‌ها در همه زبان‌ها ثابت می‌ماند -->
                 <button class="circle-btn" onclick="fullReset()" id="txtReset">Reset</button>
-                <button class="circle-btn btn-center" onclick="start()" id="txtStart">Start</button>
-                <button class="circle-btn" onclick="pause()" id="txtStop">Stop</button>
+                <button class="circle-btn btn-center" onclick="toggleStartStop()" id="txtStart">Start</button>
             </div>
         </div> 
     </div>
