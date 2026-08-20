@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch - Shahrzad Dadkhah</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main-card" id="appBody">
+   
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">FA</button>
+
+    <div class="content-container">
+ 
+        <div class="slide">
+            <div class="time-display" id="timerLabel">00:00:00</div>
+            <div class="controls-row">
+                <button class="circle-btn" onclick="fullReset()" id="txtReset">Reset</button>
+                <button class="circle-btn btn-center" onclick="start()" id="txtStart">Start</button>
+                <button class="circle-btn" onclick="pause()" id="txtStop">Stop</button>
+            </div>
+        </div> 
+    </div>
+        
+    <div class="shahrzad-signature">Shahrzad Dadkhah</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
