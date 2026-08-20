@@ -1,12 +1,12 @@
-let seconds = 0;
-let timerRef = null;
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
 let isRunning = false;
 let isFarsi = false;
 
 const timerLabel = document.getElementById('timerLabel');
 const langBtn = document.getElementById('langBtn');
 const txtStart = document.getElementById('txtStart');
-const txtStop = document.getElementById('txtStop');
 const txtReset = document.getElementById('txtReset');
 const appBody = document.getElementById('appBody');
 
@@ -15,36 +15,50 @@ const translations = {
     fa: { start: "شروع", stop: "توقف", reset: "ریست", lang: "EN" }
 };
 
-function start() {
-    if (isRunning) return; // جلوگیری از ساخت تایمر جدید
-    isRunning = true;
-
-    timerRef = setInterval(updateTime, 1000);
-    txtStart.innerText = translations[isFarsi ? "fa" : "en"].stop;
-}
-
-function pause() {
-    clearInterval(timerRef);
-    timerRef = null;
-    isRunning = false;
-
-    txtStart.innerText = translations[isFarsi ? "fa" : "en"].start;
-}
-
-function fullReset() {
-    pause();
-    seconds = 0;
-    timerLabel.innerHTML = "00:00:00";
+function toggleStartStop() {
+    if (!isRunning) {
+        // Start logic
+        isRunning = true;
+        startTime = Date.now() - elapsedTime;
+        timerInterval = setInterval(updateTime, 10); // آپدیت سریع برای دقت بالا
+        updateButtonText();
+    } else {
+        // Stop logic
+        isRunning = false;
+        clearInterval(timerInterval);
+        updateButtonText();
+    }
 }
 
 function updateTime() {
-    seconds++;
+    elapsedTime = Date.now() - startTime;
+    
+    let totalSeconds = Math.floor(elapsedTime / 1000);
+    let h = Math.floor(totalSeconds / 3600);
+    let m = Math.floor((totalSeconds % 3600) / 60);
+    let s = totalSeconds % 60;
 
-    let h = String(Math.floor(seconds / 3600)).padStart(2, "0");
-    let m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-    let s = String(seconds % 60).padStart(2, "0");
+    timerLabel.innerText = 
+        `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
 
-    timerLabel.innerHTML = `${h}:${m}:${s}`;
+function fullReset() {
+    isRunning = false;
+    clearInterval(timerInterval);
+    elapsedTime = 0;
+    timerLabel.innerText = "00:00:00";
+    updateButtonText();
+}
+
+function updateButtonText() {
+    const lang = isFarsi ? "fa" : "en";
+    if (isRunning) {
+        txtStart.innerText = translations[lang].stop;
+        txtStart.style.backgroundColor = "#e74c3c"; // تغییر رنگ اختیاری برای Stop
+    } else {
+        txtStart.innerText = translations[lang].start;
+        txtStart.style.backgroundColor = "var(--primary-bold)";
+    }
 }
 
 function toggleLang() {
@@ -52,10 +66,12 @@ function toggleLang() {
     const lang = isFarsi ? "fa" : "en";
 
     langBtn.innerText = translations[lang].lang;
-    txtStart.innerText = isRunning ? translations[lang].stop : translations[lang].start;
-    txtStop.innerText = translations[lang].stop;
     txtReset.innerText = translations[lang].reset;
+    updateButtonText();
 
-    appBody.classList.toggle("rtl", isFarsi);
+    if (isFarsi) {
+        appBody.classList.add("rtl");
+    } else {
+        appBody.classList.remove("rtl");
+    }
 }
-
