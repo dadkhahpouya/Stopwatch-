@@ -1,0 +1,130 @@
+:root {
+--bg-body: #f0f5f2;
+--card-white: #fff;
+--primary-bold: #6b8e61;
+--secondary-mint: #94b49f;
+--text-dark: #2d3b31;
+--text-light: #708a78;
+--dot-inactive: #d1dbd4;
+}
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+body {
+background: var(--bg-body)
+radial-gradient(var(--secondary-mint) 0.6px, transparent 0.6px) repeat;
+background-size: 25px 25px;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+}
+.main-card {
+width: 360px;
+height: 620px;
+background: var(--card-white);
+border-radius: 55px;
+box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+border: 1px solid rgba(0,0,0,0.02);
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+}
+.lang-btn {
+position: absolute;
+top: 35px;
+right: 35px;
+background: var(--primary-bold);
+color: #fff;
+border: none;
+padding: 7px 20px;
+border-radius: 25px;
+font-size: 0.8rem;
+font-weight: bold;
+cursor: pointer;
+z-index: 20;
+transition: transform 0.2s;
+}
+.lang-btn:active {
+transform: scale(0.9);
+}
+.content-container {
+flex: 1;
+display: flex;
+width: 100%;
+}
+.slide {
+flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 40px 25px;
+text-align: center;
+}
+.time-display {
+font-size: 4rem;
+font-weight: 800;
+color: var(--text-dark);
+margin-bottom: 60px;
+letter-spacing: -2px;
+}
+.controls-row {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+.circle-btn {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+border: none;
+background: #f1f7f3;
+color: var(--text-dark);
+font-weight: bold;
+cursor: pointer;
+font-size: 0.85rem;
+display: flex;
+justify-content: center;
+align-items: center;
+box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.circle-btn:active {
+transform: scale(0.9);
+}
+.btn-center {
+width: 100px;
+height: 100px;
+background: var(--primary-bold);
+color: #fff;
+font-size: 1.1rem;
+}
+.shahrzad-signature {
+text-align: center;
+padding-bottom: 45px;
+color: var(--primary-bold);
+font-weight: 600;
+font-size: 1.2rem;
+letter-spacing: 0.5px;
+}
+.rtl {
+direction: rtl;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch - Shahrzad Dadkhah</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="main-card" id="appBody">
+    <!-- دکمه تغییر زبان -->
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">FA</button>
